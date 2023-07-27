@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 from torchvision.utils import make_grid
 
 from src.dataset import MNISTdata
@@ -87,6 +88,13 @@ class Training:
                 self.optimizer_gen.step()
                 print(f'discriminator loss: {total_loss}, generator loss: {gen_loss}')
 
+    def save_model(self):
+        folder = os.path.join(os.path.dirname(__file__), 'models')
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        torch.save(self.generator.state_dict(), os.path.join(folder, 'generator.pt'))
+        torch.save(self.discriminator.state_dict(), os.path.join(folder, 'discriminator.pt'))
+
     def plot_images(self):
         real_images, _ = next(iter(self.dataloader))
 
@@ -109,4 +117,5 @@ class Training:
 if __name__ == '__main__':
     tr = Training()
     tr.training_loop(10)
+    tr.save_model()
     tr.plot_images()
