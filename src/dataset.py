@@ -6,9 +6,9 @@ from torchvision import datasets
 
 class MNISTdata:
     def __init__(self):
-        data_path = (os.path.dirname(__file__))
+        data_path = os.path.join(os.path.dirname(__file__), '..', 'data')
         transform = torchvision.transforms.Compose([
-                     torchvision.transforms.Resize(64),
+                     # torchvision.transforms.Resize(64),
                      torchvision.transforms.ToTensor(),
                      torchvision.transforms.Normalize((0.5,), (0.5,))
                      ])
