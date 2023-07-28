@@ -52,7 +52,10 @@ def plotting(gen_images: torch.Tensor, vae_images: torch.Tensor):
 
 
 if __name__ == '__main__':
-    n_samples = 64
+    import argparse
+    parser = argparse.ArgumentParser(description='Compare sample generation abilities of VAE and GAN')
+    parser.add_argument('--n_samples', required=True, help='number of samples to be generated each')
+    args = parser.parse_args()
     vae, gen = load_models()
-    gen_img, vae_img = generate_samples(n_samples)
+    gen_img, vae_img = generate_samples(args.n_samples)
     plotting(gen_img, vae_img)
