@@ -116,6 +116,6 @@ class Training:
 
 if __name__ == '__main__':
     tr = Training()
-    tr.training_loop(10)
+    tr.training_loop(50)
     tr.save_model()
     tr.plot_images()
